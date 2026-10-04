@@ -1,0 +1,17 @@
+COMPONENTS:
+- VDisk: file-backed virtual disk
+- RAID5: engine with XOR/math
+- Controller: state machine (OPTIMAL/DEGRADED/REBUILDING/FAILED)
+- raidctl: CLI client
+
+CLASS DIAGRAM:
+Controller "1" --> "*" VDisk : owns
+Controller "1" --> "1" RAID5 : uses
+RAID5 "1" --> "*" VDisk : reads/writes
+
+SEQUENCE: CLI -> Controller.write() -> RAID5.map_lba() -> VDisk.pwrite()
+
+STATE MACHINE:
+[OPTIMAL] --disk_fail--> [DEGRADED] --start_rebuild--> [REBUILDING] --complete--> [OPTIMAL]
+[DEGRADED] --2nd_fail--> [FAILED]
+

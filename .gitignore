@@ -1,0 +1,4 @@
+*.o
+*.img
+raidctl
+demo_output.txt
