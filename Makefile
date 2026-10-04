@@ -1,5 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -O2 -Wall -Wextra -I./include -pthread
+CXXFLAGS += -DDEBUG 
 LDFLAGS = -pthread
 
 SRCS = src/vdisk.cpp src/raid5.cpp src/controller.cpp src/main.cpp
